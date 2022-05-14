@@ -10,9 +10,9 @@ func TestStringSum(t *testing.T) {
 		Expected string
 		Err      error
 	}{
-		{In: "-70-9", Expected: "-79", Err: nil},
-		{In: " 70 + 5 ", Expected: "75", Err: nil},
-		{In: "3+5", Expected: "8", Err: nil},
+		{In: " 43 + 40 ", Expected: "83", Err: nil},
+		{In: "32+45", Expected: "77", Err: nil},
+		{In: "-44-44", Expected: "-88", Err: nil},
 		{In: "-3+5", Expected: "2", Err: nil},
 		{In: "", Expected: "", Err: GetErrorEmptyInput()},
 		{In: " ", Expected: "", Err: GetErrorEmptyInput()},

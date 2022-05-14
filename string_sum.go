@@ -36,6 +36,7 @@ func StringSum(input string) (output string, err error) {
 	} else {
 		var resultExpression = 0
 		var isMinus bool
+		var indexCurrent int
 
 		inputValue := []rune(input)
 
@@ -44,6 +45,7 @@ func StringSum(input string) (output string, err error) {
 				isMinus = false
 			} else if element == '-' {
 				isMinus = true
+			} else if indexCurrent >= index && indexCurrent != 0 {
 			} else {
 				if !unicode.IsDigit(element) {
 					return "", fmt.Errorf("%s", "got invalid value")
@@ -52,8 +54,8 @@ func StringSum(input string) (output string, err error) {
 				digit = append(digit, element)
 				for index < len(inputValue)-1 && unicode.IsDigit(inputValue[index+1]) {
 					digit = append(digit, inputValue[index+1])
-					index = index + 1
-					varOperand--
+					index++
+					indexCurrent = index
 				}
 				value, _ := strconv.Atoi(string(digit))
 
