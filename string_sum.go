@@ -29,6 +29,7 @@ func StringSum(input string) (output string, err error) {
 	strings.ReplaceAll(input, " ", "")
 	if input == "" {
 		err = fmt.Errorf("something went wrong: %w", errorEmptyInput)
+		output = "0"
 	} else {
 		var resultExpression = 0
 		result := strings.Split(input, "")
