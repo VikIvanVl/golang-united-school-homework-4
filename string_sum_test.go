@@ -18,6 +18,8 @@ func TestStringSum(t *testing.T) {
 		{In: " ", Expected: "", Err: GetErrorEmptyInput()},
 		{In: "-", Expected: "", Err: GetErrorNotTwoOperands()},
 		{In: "-3+4+5", Expected: "", Err: GetErrorNotTwoOperands()},
+		{In: "A+3", Expected: "", Err: GetErrorInvalidValue()},
+		{In: "3+B", Expected: "", Err: GetErrorInvalidValue()},
 	}
 	for _, q := range data {
 		got, err := StringSum(q.In)
