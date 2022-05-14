@@ -16,7 +16,7 @@ func TestStringSum(t *testing.T) {
 		{In: "-3+5", Expected: "2", Err: nil},
 		{In: "", Expected: "", Err: GetErrorEmptyInput()},
 		{In: " ", Expected: "", Err: GetErrorEmptyInput()},
-		{In: "3", Expected: "", Err: GetErrorNotTwoOperands()},
+		{In: "-", Expected: "", Err: GetErrorNotTwoOperands()},
 		{In: "-3+4+5", Expected: "", Err: GetErrorNotTwoOperands()},
 	}
 	for _, q := range data {
