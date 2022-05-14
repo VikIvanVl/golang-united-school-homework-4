@@ -12,6 +12,7 @@ func TestStringSum(t *testing.T) {
 		Err      error
 	}{
 		{In: "3+5", Expected: "8", Err: nil},
+		{In: " 3 + 5 ", Expected: "8", Err: nil},
 		{In: "-3+5", Expected: "2", Err: nil},
 		{In: "-3-5", Expected: "-8", Err: nil},
 		{In: "", Expected: "", Err: fmt.Errorf("%w", errorEmptyInput)},

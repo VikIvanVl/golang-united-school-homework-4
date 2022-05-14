@@ -35,8 +35,11 @@ func StringSum(input string) (output string, err error) {
 		output = ""
 	} else {
 		var resultExpression = 0
-		result := strings.Split(input, "")
+		var result []string
 		var isMinus bool
+		for i := 0; i < len(input); i++ {
+			result = append(result, string(input[i]))
+		}
 		for _, element := range result {
 			if element == "+" {
 				isMinus = false
