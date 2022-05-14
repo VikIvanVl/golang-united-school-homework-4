@@ -56,7 +56,7 @@ func StringSum(input string) (output string, err error) {
 				}
 				value, er := strconv.Atoi(string(digit))
 				if er != nil {
-					return "", fmt.Errorf("%w", er)
+					return "", er
 				}
 				varOperand++
 
