@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_StringSum(t *testing.T) {
+func TestStringSum(t *testing.T) {
 	data := []struct {
 		In       string
 		Expected string
