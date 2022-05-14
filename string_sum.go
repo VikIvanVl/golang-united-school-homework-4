@@ -28,8 +28,9 @@ var (
 func StringSum(input string) (output string, err error) {
 	strings.ReplaceAll(input, " ", "")
 	var varOperand = 0
-
-	if input == "" {
+	if len(input) < 3 {
+		err = fmt.Errorf("%w", errorNotTwoOperands)
+	} else if input == "" {
 		err = fmt.Errorf("%w", errorEmptyInput)
 		output = ""
 	} else {
