@@ -14,10 +14,10 @@ func TestStringSum(t *testing.T) {
 		{In: "3+5", Expected: "8", Err: nil},
 		{In: "-3+5", Expected: "2", Err: nil},
 		{In: "-3-5", Expected: "-8", Err: nil},
-		{In: "", Expected: "0", Err: fmt.Errorf("something went wrong: %w", errorEmptyInput)},
-		{In: " ", Expected: "0", Err: fmt.Errorf("something went wrong: %w", errorEmptyInput)},
-		{In: "3", Expected: "0", Err: fmt.Errorf("something went wrong: %w", errorNotTwoOperands)},
-		{In: "-3+4+5", Expected: "0", Err: fmt.Errorf("something went wrong: %w", errorNotTwoOperands)},
+		{In: "", Expected: "", Err: fmt.Errorf("%w", errorEmptyInput)},
+		{In: " ", Expected: "", Err: fmt.Errorf("%w", errorEmptyInput)},
+		{In: "3", Expected: "", Err: fmt.Errorf("%w", errorNotTwoOperands)},
+		{In: "-3+4+5", Expected: "", Err: fmt.Errorf("%w", errorNotTwoOperands)},
 	}
 	for _, q := range data {
 		got, err := StringSum(q.In)

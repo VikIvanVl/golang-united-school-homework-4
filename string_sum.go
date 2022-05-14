@@ -26,12 +26,12 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
+	strings.ReplaceAll(input, " ", "")
 	var varOperand = 0
 
-	strings.ReplaceAll(input, " ", "")
 	if input == "" {
-		err = fmt.Errorf("something went wrong: %w", errorEmptyInput)
-		output = "0"
+		err = fmt.Errorf("%w", errorEmptyInput)
+		output = ""
 	} else {
 		var resultExpression = 0
 		result := strings.Split(input, "")
@@ -43,7 +43,10 @@ func StringSum(input string) (output string, err error) {
 				isMinus = true
 			} else {
 				varOperand++
-				value, _ := strconv.Atoi(element)
+				value, err := strconv.Atoi(element)
+				if err != nil {
+					err = fmt.Errorf("%s", "invalid value")
+				}
 				if isMinus {
 					resultExpression -= value
 				} else {
@@ -52,10 +55,11 @@ func StringSum(input string) (output string, err error) {
 			}
 		}
 		if varOperand != 2 {
-			err = fmt.Errorf("something went wrong: %w", errorNotTwoOperands)
+			err = fmt.Errorf("%w", errorNotTwoOperands)
 		} else {
 			output = fmt.Sprint(resultExpression)
 		}
 	}
+
 	return output, err
 }
