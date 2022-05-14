@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -34,22 +35,32 @@ func StringSum(input string) (output string, err error) {
 		return "", GetErrorNotTwoOperands()
 	} else {
 		var resultExpression = 0
-		var result []string
 		var isMinus bool
-		for i := 0; i < len(input); i++ {
-			result = append(result, string(input[i]))
-		}
-		for _, element := range result {
-			if element == "+" {
+
+		inputValue := []rune(input)
+
+		for index, element := range inputValue {
+			if element == '+' {
 				isMinus = false
-			} else if element == "-" {
+			} else if element == '-' {
 				isMinus = true
 			} else {
-				varOperand++
-				value, err := strconv.Atoi(element)
-				if err != nil {
-					err = fmt.Errorf("%s", "invalid value")
+				if !unicode.IsDigit(element) {
+					return "", fmt.Errorf("%s", "invalid value")
 				}
+				var digit []rune
+				digit = append(digit, element)
+				if index < len(inputValue)-1 {
+					for unicode.IsDigit(inputValue[index+1]) {
+						digit = append(digit, inputValue[index+1])
+						index = index + 1
+						varOperand--
+					}
+				}
+				value, _ := strconv.Atoi(string(digit))
+
+				varOperand++
+
 				if isMinus {
 					resultExpression -= value
 				} else {
