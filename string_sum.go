@@ -49,7 +49,8 @@ func StringSum(input string) (output string, err error) {
 			} else {
 				var digit []rune
 				digit = append(digit, element)
-				for index < len(inputValue)-1 && unicode.IsDigit(inputValue[index+1]) {
+				for index < len(inputValue)-1 && (unicode.IsDigit(inputValue[index+1]) ||
+					unicode.IsLetter(inputValue[index+1])) {
 					digit = append(digit, inputValue[index+1])
 					index++
 					indexCurrent = index
