@@ -26,13 +26,12 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	strings.ReplaceAll(input, " ", "")
+	input = strings.ReplaceAll(input, " ", "")
 	var varOperand = 0
-	if len(input) < 3 {
-		err = fmt.Errorf("%w", errorNotTwoOperands)
-	} else if input == "" {
-		err = fmt.Errorf("%w", errorEmptyInput)
-		output = ""
+	if input == "" {
+		return "", GetErrorEmptyInput()
+	} else if len(input) < 3 {
+		return "", GetErrorNotTwoOperands()
 	} else {
 		var resultExpression = 0
 		var result []string
@@ -59,11 +58,19 @@ func StringSum(input string) (output string, err error) {
 			}
 		}
 		if varOperand != 2 {
-			err = fmt.Errorf("%w", errorNotTwoOperands)
+			return "", GetErrorNotTwoOperands()
 		} else {
 			output = fmt.Sprint(resultExpression)
 		}
 	}
 
 	return output, err
+}
+
+func GetErrorEmptyInput() error {
+	return fmt.Errorf("%w", errorEmptyInput)
+}
+
+func GetErrorNotTwoOperands() error {
+	return fmt.Errorf("%w", errorNotTwoOperands)
 }
