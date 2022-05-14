@@ -14,8 +14,6 @@ var (
 	errorEmptyInput = errors.New("input is empty")
 	// Use when the expression has number of operands not equal to two
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
-	// Expect invalid value
-	errorInvalidValue = errors.New("expecting invalid value")
 )
 
 // Implement a function that computes the sum of two int numbers written as a string
@@ -49,9 +47,6 @@ func StringSum(input string) (output string, err error) {
 				isMinus = true
 			} else if indexCurrent >= index && indexCurrent != 0 {
 			} else {
-				if !unicode.IsDigit(element) {
-					return "", GetErrorInvalidValue()
-				}
 				var digit []rune
 				digit = append(digit, element)
 				for index < len(inputValue)-1 && unicode.IsDigit(inputValue[index+1]) {
@@ -59,8 +54,10 @@ func StringSum(input string) (output string, err error) {
 					index++
 					indexCurrent = index
 				}
-				value, _ := strconv.Atoi(string(digit))
-
+				value, er := strconv.Atoi(string(digit))
+				if er != nil {
+					return "", fmt.Errorf("%w", er)
+				}
 				varOperand++
 
 				if isMinus {
@@ -86,8 +83,4 @@ func GetErrorEmptyInput() error {
 
 func GetErrorNotTwoOperands() error {
 	return fmt.Errorf("%w", errorNotTwoOperands)
-}
-
-func GetErrorInvalidValue() error {
-	return fmt.Errorf("%w", errorInvalidValue)
 }
